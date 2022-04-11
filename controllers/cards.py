@@ -20,7 +20,8 @@ class Cards_Others(Resource):
     def get(self, card_id):
         g = GetCard(card_id)
         return g.GetDict(), 200
-
+      
+    @auth_required("token")
     def delete(self, card_id):
         g = GetCard(card_id)
         if g == None:
@@ -28,7 +29,8 @@ class Cards_Others(Resource):
         db.session.delete(g)
         db.session.commit()
         return g.GetDict(), 200
-
+    
+    @auth_required("token")
     def put(self, card_id):
         g = GetCard(card_id)
         if g == None:
@@ -59,6 +61,8 @@ def createCard(Front, Back, Deck):
 
 
 class Cards_Create(Resource):
+    
+    @auth_required("token")
     def post(self):
         if request.content_type == "application/json":
             front = request.json["front"]

@@ -26,11 +26,11 @@ def GetScoresbyDeck(id):
 class Deck_Others(Resource):
 
     @auth_required("token")
-
     def get(self,deck_id):
         g=GetDeck(deck_id)
         return g.GetDict(),200
-
+      
+    @auth_required("token")
     def delete(self,deck_id):
         g=GetDeck(deck_id)
         if g==None:
@@ -40,15 +40,17 @@ class Deck_Others(Resource):
         if c!=None:
             for x in c:
                 db.session.delete(x)
+                db.session.commit()
         s=GetScoresbyDeck(deck_id)
         if s!=None:
             for x in c:
-                db.session.delete(c)
+                db.session.delete(x)
                 db.session.commit()
         db.session.delete(g)
         db.session.commit()
         return g.GetDict(),200
-
+      
+    @auth_required("token")
     def put(self,deck_id):
         g=GetDeck(deck_id)
         if request.content_type=='application/json':
@@ -72,6 +74,7 @@ def creteDeck(name):
 
 class Decks_Create(Resource):
 
+    # @auth_required("token")
     def post(self):
         if request.content_type=='application/json':
             name=request.json['name']
@@ -91,11 +94,9 @@ class Decks_Create(Resource):
         
 
     @auth_required("token")
-
     def get(self):
         g=GetAllDecks()
         a=[]
         for x in g:
             a.append(x.GetDict())
         return a
-
