@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}
+Quiz
+{% endblock %}
+{% block content %}
+<br>
+<div id="user" class="text-secondary">
+    {{current_user.id}}
+</div>
+<section class="">
+    <section>
+        <center>
+            <h3>
+                <td>Deck ID:</td>
+                <td><span id="main">{{deck}}</span></td>
+                <td>Name : {{name}}</td>
+            </h3>
+        </center>
+    </section>
+    <br>
+    <br>
+    {% raw %}
+    <div id="app">
+        <center>
+            <h4><button class="btn btn-dark" @click="save">Save your attempts</button></h4>
+        </center>
+        <div class="card text-white bg-dark text-center">
+            <div class="card-header">
+                <h2>Quiz Section</h2>
+            </div>
+            <div class="card-body" id="End">
+                <h1>END of the DECK</h1>
+            </div>
+            <div class="card-body" id="Question">
+                <h5 class="card-title">Question</h5>
+                <p class="card-text">{{doubt}}</p>
+                <p class="btn btn-primary" @click="showAns">Show Answer</p>
+            </div>
+            <div class="card-header" id="Answer" style="display:none;">
+                <h2>{{solution}}</h2>
+                <p class="btn btn-info" @click="showQues">Next Question</p>
+            </div>
+            <div class="card-body text-white bg-secondary text-center" id="Feedback" style="display: none;">
+                <p class="card-text">What you felt about this Question</p>
+                <td>
+                    <p class="btn btn-success" @click="eUpdate">EASY</p>
+                </td>
+                <td>
+                    <p class="btn btn-primary" @click="mUpdate">MODERATE</p>
+                </td>
+                <td>
+                    <p class="btn btn-danger" @click="hUpdate">HARD</p>
+                </td>
+            </div>
+            <div class="card-footer text-dark  bg-dark">
+                <td>
+                    <span class="badge btn-danger" style="width:10%;">{{easy}}</span>
+                </td>
+                <td>
+                    <span class="badge btn-primary" style="width:10%;">{{medium}}</span>
+                </td>
+                <td>
+                    <span class="badge btn-success" style="width:10%;">{{hard}}</span>
+                </td>
+            </div>
+        </div>
+    </div>
+    {% endraw %}
+</section>
+<script src="/static/js/review.js"></script>
+{% endblock %}

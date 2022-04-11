@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+Deck Management Page
+{% endblock %}
+{% block content %}
+<div id="app">
+  {%raw%}{{tid}}{{temp}}{%endraw%}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col" colspan="2" style="text-align: center;"> Modifications </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% raw %}
+      <tr v-for="deck in decks">
+        <td>{{deck.id}}</td>
+        <td>{{deck.name}}</td>
+        <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModifyModal" v-on:click="setd(deck.name,deck.id)">Update</button></td>
+        <td><button class="btn btn-danger" v-on:click="deleteValue(deck.name,deck.id)">Delete</button></td>
+      </tr>
+      {% endraw %}
+    </tbody>
+  </table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModifyModal" tabindex="-1" aria-labelledby="ModifyModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModifyModalLabel">Modify the Deck</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="form-group">
+          <label class="form-label">ID</label>
+          <input type="text" v-model="tid" id="UpdateId" disabled>
+
+          <label class="form-label">Enter the value to update </label>
+          <input type="text" v-model="temp" id="UpdateDeck">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" @click="updateValue()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script src="/static/js/decks.js"></script>
+{% endblock %}

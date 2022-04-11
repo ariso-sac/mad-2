@@ -1,0 +1,1 @@
+celery -A celeryConfig  flower --port=5000 --loglevel=info

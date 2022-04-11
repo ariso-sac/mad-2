@@ -1,0 +1,1 @@
+celery -A celeryConfig worker --beat --loglevel=info

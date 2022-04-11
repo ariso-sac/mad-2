@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}
+Card Management Page
+{% endblock %}
+{% block content %}
+<section>
+    <p id="main">{{deck}}</p>
+    <center>
+        <h3> Deck Name : {{name}}</h3>
+        <br />
+    </center>
+    {% raw %}
+    <div id="app">
+        <div>
+            <div class="form-group">
+                <div class="row">
+                    <label for="deckID" class="col-sm-2">Enter DeckID</label>
+                    <input type="number" id="deckID" v-model="deck_id" class="col col-sm-2">
+                </div>
+            </div>
+            <!-- Button trigger modal -->
+            <p class="btn btn-warning form-group" @click="getCards()">Go to the Deck</p>
+        </div>
+        <div>
+            <center>
+                <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#modal">
+                    Create a Card
+                </button>
+            </center>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Front</th>
+                        <th scope="col">Back</th>
+                        <th scope="col" colspan="2" style="text-align: center;"> Modifications </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="card in cards">
+                        <td>{{card.id}}</td>
+                        <td>{{card.front}}</td>
+                        <td>{{card.back}}</td>
+                        <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update"
+                                v-on:click="update(card.id,card.front,card.back)">Update</button></td>
+                        <td><button class="btn btn-danger" v-on:click="deleteValue(card.id)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="CreateLabel">Create</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3"> <label for="front" class="form-label">Front</label>
+                            <input required type="text" v-model="top" name="form-control" id="frontCreate">
+                        </div>
+
+                        <div class="mb-3"><label for="back" class="form-label">Back</label>
+                            <input required type="text" v-model="bottom" name="form-control" id="backCreate">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" @click="create">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Ends -->
+
+        <!-- Update Modal -->
+        <div class="modal fade" id="update" tabindex="-1" aria-labelledby="updateLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateLabel">Update the Card...</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3"> <label for="front" class="form-label">Front</label>
+                            <input required type="text" v-model="head" name="form-control" id="frontCreate">
+                        </div>
+
+                        <div class="mb-3"><label for="tail" class="form-label">Back</label>
+                            <input required type="text" v-model="tail" name="form-control" id="backCreate">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" @click="save()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Update Model Ends -->
+
+    </div>
+    {% endraw %}
+</section>
+<script src="/static/js/cards.js"></script>
+{% endblock %}

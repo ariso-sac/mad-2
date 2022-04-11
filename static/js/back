@@ -1,0 +1,25 @@
+function setkey() {
+    var user = document.getElementById('user').value
+    var pass = document.getElementById('pass').value
+    var pay = { "email": user, "password": pass }
+    console.log(user, pass)
+    fetch('/login?include_auth_token', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pay) // body data type must match "Content-Type" header
+    })
+        .then(response => response.json())
+        .then(data => putkey(data))
+}
+function putkey(key) {
+    var v=key.response.user.authentication_token
+    localStorage.setItem('key', JSON.stringify(v));
+    console.log(v)
+    changeUrl()
+}
+function changeUrl() {
+    window.location.replace("/dashboard")
+}
