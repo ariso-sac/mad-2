@@ -92,6 +92,7 @@ const app = new Vue({
             })
             const b = a.json()
             console.log(b.status);
+		alert("Hello! Scores are updated");
         }
     },
     computed: {
