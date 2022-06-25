@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'VUEFLASHCARDSACSIN'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_155D8BFEEA23411DAE929F721E7BDD1E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D97A2CAB47BB43D3896A3F87F75A3199 }}
